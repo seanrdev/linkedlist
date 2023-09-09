@@ -79,8 +79,8 @@ ssize_t      insert_LinkedList(linkedlist_t *ll, element_t elem);
 element_t    remove_LinkedList(linkedlist_t *ll, size_t ndx);
 
 // TODO don't let client code access Node
-int add(Node *a, LinkedList *b);
-Node* getNode(unsigned int node_num, LinkedList *l);
+int add(struct Node *a, struct LinkedList *b);
+struct Node* getNode(unsigned int node_num, struct LinkedList *l);
 
 #ifdef __cplusplus
 }
