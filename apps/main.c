@@ -1,7 +1,12 @@
+#include <assert.h>
+#include <errno.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "dll/dll.h"
-#include "dll/node.h"
+//#include "dll/node.h"
+
+#define LINESZ (256)
 
 /**
  * @param files
@@ -40,15 +45,38 @@ static int init_files(FILE *files[], const int argc, const char *const argv[]) {
 }
 
 /**
- * @param file
+ * @param line
  * @returns non-zero on error
  */
-static int process_file(FILE *file) {
+static int process_line(char *line) {
   //bool        isempty_LinkedList(linkedlist_t *ll);
   //ssize_t        find_LinkedList(linkedlist_t *ll, element_t elem);
   //element_t      *get_LinkedList(linkedlist_t *ll, size_t ndx);
   //ssize_t      insert_LinkedList(linkedlist_t *ll, element_t elem);
   //element_t    remove_LinkedList(linkedlist_t *ll, size_t ndx);
+  printf("line: %s\n", line);
+  return EXIT_SUCCESS;
+}
+
+/**
+ * @param file
+ * @returns non-zero on error
+ */
+static int process_file(FILE *file) {
+  int e;
+  char line[LINESZ];
+  while(fgets(line, sizeof(line), file)) {
+    e = process_line(line);
+    if(__builtin_expect(e == 0, true)) continue;
+    fprintf(stderr, "failed to process line: %s\n", line);
+    return e;
+  }
+  e = ferror(file);
+  if(__builtin_expect(e != 0, false)) {
+    fputs("error reading input", stderr);
+    return e;
+  }
+  assert(feof(file) != 0);
   return EXIT_SUCCESS;
 }
 
@@ -71,7 +99,7 @@ int main(const int argc, const char *const argv[]) {
   for(i = 0; i < argc; i++) {
     const int e = process_file(files[i]);
     if(__builtin_expect(e == 0, true)) continue;
-    fprintf("failed to process file: %s\n", argv[i+1]);
+    fprintf(stderr, "failed to process file: %s\n", argv[i+1]);
     return e;
   }
   deinit_files(files, argc);
