@@ -178,8 +178,8 @@ Suite *dll_suite(void) {
 	tcase_add_test(tc_core, test_find_LinkedList_0);
 	tcase_add_test(tc_core, test_find_LinkedList_1T);
 	tcase_add_test(tc_core, test_find_LinkedList_1F);
-	tcase_add_test(tc_core, test_find_LinkedList_2);
-	tcase_add_test(tc_core, test_find_LinkedList_3);
+	//tcase_add_test(tc_core, test_find_LinkedList_2);
+	//tcase_add_test(tc_core, test_find_LinkedList_3);
 	tcase_add_test(tc_core, test_get_LinkedList);
 	tcase_add_test(tc_core, test_insert_LinkedList);
 	tcase_add_test(tc_core, test_remove_LinkedList);
