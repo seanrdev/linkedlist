@@ -14,6 +14,7 @@ START_TEST(test_free_Node) {
   node_t *node = alloc_Node();
   free_Node(node);
 }
+END_TEST
 
 START_TEST(test_init_Node) {
   node_t node;
@@ -22,6 +23,7 @@ START_TEST(test_init_Node) {
   ck_assert_ptr_eq(node.prev, &node);
   ck_assert_int_eq(node.element, -1);
 }
+END_TEST
 
 START_TEST(test_deinit_Node) {
   node_t node;
@@ -33,6 +35,7 @@ START_TEST(test_deinit_Node) {
   ck_assert_ptr_null(node.prev);
   ck_assert_int_eq(node.element, 0);
 }
+END_TEST
 
 START_TEST(test_setnext_Node) {
   node_t a, b;
@@ -40,6 +43,7 @@ START_TEST(test_setnext_Node) {
   ck_assert_ptr_eq(a.next, &b);
   ck_assert_ptr_eq(b.prev, &a);
 }
+END_TEST
 
 START_TEST(test_setprev_Node) {
   node_t a, b;
