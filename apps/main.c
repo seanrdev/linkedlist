@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "node.h"
-#include "dll.h"
+#include "dll/node.h"
+#include "dll/dll.h"
 
 int main(){
 	Node *test = (Node *) malloc(1 * sizeof(struct Node*));

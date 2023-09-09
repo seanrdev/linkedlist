@@ -1,5 +1,5 @@
 #include <stddef.h>
-#include "node.h"
+#include "dll/node.h"
 
 typedef struct LinkedList{
 	struct Node *head;

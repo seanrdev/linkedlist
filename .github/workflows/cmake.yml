@@ -1,0 +1,79 @@
+name: CMake CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: check doxygen graphviz
+        version: 1.0
+
+    - name: Setup Ninja
+      uses: ashutoshvarma/setup-ninja@master
+      with:
+        version: 1.10.0
+
+    #- name: Build with CMake
+    #    uses: ashutoshvarma/action-cmake-build@master
+    #    with:
+    #      build-dir: ${{ runner.workspace }}/build
+    #      cc: ${{ matrix.config.cc }}
+    #      cxx: ${{ matrix.config.cxx }}
+    #      configure-options: -G Ninja
+    #      build-type: Release
+
+    - name: configure
+      run: cmake -S . -B build -GNinja -DCMAKE_BUILD_TYPE=Release
+
+    - name: build
+      run: cmake --build build
+
+    - name: unit test
+      run: cmake --build build --target test
+
+    - name: docs
+      run: cmake --build build --target docs
+
+    - name: deploy docs to gh-pages
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/cmake'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build/docs/html
+
+    - name: binary release archive
+      run: cmake --build build --target package
+    - name: source release archive
+      run: cmake --build build --target package_source
+
+    - name: Bump version and push tag
+      id: tag_version
+      uses: mathieudutour/github-tag-action@v6.1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.tag_version.outputs.new_tag }}
+        fail_on_unmatched_files: true
+        generate_release_notes: true
+        files: |
+          build/LinkedList-*.*.*-*.7z
+          build/LinkedList-*.*.*-*.sh
+          build/LinkedList-*.*.*-*.tar.bz2
+          build/LinkedList-*.*.*-*.tar.gz
+          build/LinkedList-*.*.*-*.tar.xz
+          build/LinkedList-*.*.*-*.tar.Z
+          build/LinkedList-*.*.*-*.zip
+          build/linkedlist_*.*.*_*.deb
+
