@@ -6,15 +6,15 @@
 #include "dll/node.h"
 
 // TODO
-static linkedlist_t *alloc_LinkedList()                                 { return NULL; }
-static void           init_LinkedList(linkedlist_t *ll)                 { }
-static void         deinit_LinkedList(linkedlist_t *ll)                 { }
-static void           free_LinkedList(linkedlist_t *ll)                 { }
-static bool        isempty_LinkedList(linkedlist_t *ll)                 { return true; }
-static ssize_t        find_LinkedList(linkedlist_t *ll, element_t elem) { return   -1; }
-static element_t      *get_LinkedList(linkedlist_t *ll, size_t ndx)     { return    0; }
-static ssize_t      insert_LinkedList(linkedlist_t *ll, element_t elem) { return   -1; }
-static element_t    remove_LinkedList(linkedlist_t *ll, size_t ndx)     { return    0; }
+linkedlist_t *alloc_LinkedList()                                 { return NULL; }
+void           init_LinkedList(linkedlist_t *ll)                 { }
+void         deinit_LinkedList(linkedlist_t *ll)                 { }
+void           free_LinkedList(linkedlist_t *ll)                 { }
+bool        isempty_LinkedList(linkedlist_t *ll)                 { return true; }
+ssize_t        find_LinkedList(linkedlist_t *ll, element_t elem) { return   -1; }
+element_t      *get_LinkedList(linkedlist_t *ll, size_t ndx)     { return    0; }
+ssize_t      insert_LinkedList(linkedlist_t *ll, element_t elem) { return   -1; }
+element_t    remove_LinkedList(linkedlist_t *ll, size_t ndx)     { return    0; }
 
 
 START_TEST(test_alloc_LinkedList) {
