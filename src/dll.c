@@ -19,6 +19,15 @@ int add(Node *a, LinkedList *l){
 		a->next = NULL; //redundant
 		l->elements++;
 	}
+	if(l->elements == 1){
+		//l->head->next = a;
+		l->tail = a;
+		a->next = NULL;
+		a->prev = l->head;
+		l->elements++;
+	} else {
+		//everything else
+	}
 }
 
 Node* getNode(int node_num, LinkedList *l){

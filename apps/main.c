@@ -10,5 +10,8 @@ int main(){
 	initialize(test1);
 	int data;
 	add(test, test1);
+	Node *test6 = (Node *) malloc(1 * sizeof(struct Node*));
+	add(test6, test1);
+	printf("Test end");
 }
 //test
