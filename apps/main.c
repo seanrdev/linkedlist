@@ -9,22 +9,13 @@
  * @returns non-zero on error
  */
 static int deinit_files(FILE *files[], const int argc) {
-  int i, e = 0;
-  for(i = 0; i < argc; i++) e |= fclose(files[i]);
+  int i, e = EXIT_SUCCESS;
+  for(i = 0; i < argc; i++) {
+    const int f = fclose(files[i]);
+    if(__builtin_expect(f != 0, false)) fprintf(stderr, "failed to deinitialize FILE pointer\n");
+    e |= f;
+  }
   return e;
-}
-
-/**
- * @param files
- * @param argi
- * @param argv
- * @returns non-zero on error
- */
-static int init_file(FILE *files[], const int argi, const char *const argv[]) {
-  int j, e = 0;
-  files[argi-1] = fopen(argv[argi], "r");
-  if(__builtin_expect(files[argi-1] != NULL, true)) return 0;
-  return EXIT_FAILURE | deinit_files(files, argi);
 }
 
 /**
@@ -34,19 +25,31 @@ static int init_file(FILE *files[], const int argi, const char *const argv[]) {
  * @returns non-zero on error
  */
 static int init_files(FILE *files[], const int argc, const char *const argv[]) {
-  int i, e;
+  int i;
   if(argc == 1) {
     files[0] = stdin;
-    return 0;
+    return EXIT_SUCCESS;
   }
   for(i = 1; i < argc; i++) {
-    e = init_file(files, i, argv);
-    if(__builtin_expect(e != 0, false)) {
-      fprintf(stderr, "failed to initialize FILE pointer for file: %s\n", argv[i]);
-      return e;
-    }
+    files[i-1] = fopen(argv[argi], "r")
+    if(__builtin_expect(files[i-1] != NULL, true)) continue;
+    fprintf(stderr, "failed to initialize FILE pointer for file: %s\n", argv[i]);
+    return EXIT_FAILURE | deinit_files(files, i);
   }
-  return 0;
+  return EXIT_SUCCESS;
+}
+
+/**
+ * @param file
+ * @returns non-zero on error
+ */
+static int process_file(FILE *file) {
+  //bool        isempty_LinkedList(linkedlist_t *ll);
+  //ssize_t        find_LinkedList(linkedlist_t *ll, element_t elem);
+  //element_t      *get_LinkedList(linkedlist_t *ll, size_t ndx);
+  //ssize_t      insert_LinkedList(linkedlist_t *ll, element_t elem);
+  //element_t    remove_LinkedList(linkedlist_t *ll, size_t ndx);
+  return EXIT_SUCCESS;
 }
 
 /**
@@ -66,15 +69,11 @@ int main(const int argc, const char *const argv[]) {
   }
   init_files(files, argc, argv);
   for(i = 0; i < argc; i++) {
-    file = files[i];
-    //readlines(file);
+    const int e = process_file(files[i]);
+    if(__builtin_expect(e == 0, true)) continue;
+    fprintf("failed to process file: %s\n", argv[i+1]);
+    return e;
   }
-
-  //bool        isempty_LinkedList(linkedlist_t *ll);
-  //ssize_t        find_LinkedList(linkedlist_t *ll, element_t elem);
-  //element_t      *get_LinkedList(linkedlist_t *ll, size_t ndx);
-  //ssize_t      insert_LinkedList(linkedlist_t *ll, element_t elem);
-  //element_t    remove_LinkedList(linkedlist_t *ll, size_t ndx);
   deinit_files(files, argc);
   free(files);
   return EXIT_SUCCESS;
