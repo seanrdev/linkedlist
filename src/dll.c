@@ -14,10 +14,9 @@ int initialize(LinkedList *a){
 
 int add(Node *a, LinkedList *l){
 	if(l->elements == 0){
-		a->next = l->tail;
-		a->prev = l->head;
-		l->head->next = a;
-		l->tail->prev = a;
+		l->head = a;
+		a->prev = NULL;
+		a->next = NULL; //redundant
 		l->elements++;
 	}
 }
