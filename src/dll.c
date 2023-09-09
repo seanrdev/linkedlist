@@ -18,8 +18,7 @@ int add(Node *a, LinkedList *l){
 		a->prev = NULL;
 		a->next = NULL; //redundant
 		l->elements++;
-	}
-	if(l->elements == 1){
+	}else if(l->elements == 1){
 		//l->head->next = a;
 		l->tail = a;
 		a->next = NULL;
