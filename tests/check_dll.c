@@ -112,7 +112,7 @@ START_TEST(test_find_LinkedList_1T) {
   int i;
   init_Node(&node, NULL, NULL, 10);
   ll.head     = &node;
-  ll.prev     = &node;
+  ll.tail     = &node;
   ll.elements = 1;
   ck_assert_int_eq(find_LinkedList(&ll, 10), 0);
 }
@@ -124,7 +124,7 @@ START_TEST(test_find_LinkedList_1F) {
   int i;
   init_Node(&node, NULL, NULL, -10);
   ll.head     = &node;
-  ll.prev     = &node;
+  ll.tail     = &node;
   ll.elements = 1;
   ck_assert_int_eq(find_LinkedList(&ll, 10), 0);
 }
