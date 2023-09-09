@@ -14,7 +14,7 @@ typedef struct LinkedList{
 }LinkedList;
 
 int add(Node *a, LinkedList *b);
-Node* getNode(int node_num);
+Node* getNode(unsigned int node_num, LinkedList *l);
 
 #ifdef __cplusplus
 }

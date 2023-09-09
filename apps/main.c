@@ -15,5 +15,15 @@ int main(){
 	test6->digit = 45;
 	add(test6, test1);
 	printf("Node 1 has %d and 2 has %d", test1->head->digit, test1->tail->digit);
+
+	LinkedList *large = (LinkedList *) malloc(1 * sizeof(struct LinkedList*));
+	//Node (*tester) [100] = (Node *) malloc(1 * sizeof(struct Node*));
+	Node (*tester) [100] = (Node *) malloc(1 * sizeof(struct Node*));
+
+	for(int i = 0; i < 100; i++){
+		tester[i]->digit = i*3;
+		add(tester[1], large);
+	}
+	printf("complete");
 }
 //test
