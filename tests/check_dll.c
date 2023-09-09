@@ -5,16 +5,22 @@
 #include "dll/dll.h"
 #include "dll/node.h"
 
-//START_TEST(test_initialize) {
-//	int e = initialize();
-//	// TODO
-//	//ck_assert_int_ne(e, EOF);
-//}
-//END_TEST
+/*
+linkedlist_t *alloc_LinkedList();
+void           init_LinkedList(linkedlist_t *ll);
+void         deinit_LinkedList(linkedlist_t *ll);
+void           free_LinkedList(linkedlist_t *ll);
+bool        isempty_LinkedList(linkedlist_t *ll);
+ssize_t        find_LinkedList(linkedlist_t *ll, element_t elem);
+element_t      *get_LinkedList(linkedlist_t *ll, size_t ndx);
+ssize_t      insert_LinkedList(linkedlist_t *ll, element_t elem);
+element_t    remove_LinkedList(linkedlist_t *ll, size_t ndx);
+*/
+
 START_TEST(test_add) {
-	//int e = add(NULL, NULL);
-	ck_assert_int_eq(0, 0);
-	// TODO
+  //int e = add(NULL, NULL);
+  ck_assert_int_eq(0, 0);
+  // TODO
 }
 END_TEST
 START_TEST(test_getNode) {

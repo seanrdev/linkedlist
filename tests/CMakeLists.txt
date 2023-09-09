@@ -11,3 +11,8 @@ target_compile_features(check_dll PRIVATE cxx_std_17)
 target_link_libraries(check_dll PRIVATE dll_library Check::check)
 add_test(NAME check_dlltest COMMAND check_dll) # Command can be a target
 
+add_executable(check_node check_node.c)
+target_compile_features(check_node PRIVATE cxx_std_17)
+target_link_libraries(check_node PRIVATE node_library Check::check)
+add_test(NAME check_nodetest COMMAND check_node) # Command can be a target
+
