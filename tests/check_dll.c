@@ -84,7 +84,7 @@ END_TEST
 START_TEST(test_isempty_LinkedList_0) {
   linkedlist_t ll;
   init_LinkedList(&ll);
-  ck_assert_true(isempty_LinkedList(&ll));
+  ck_assert(isempty_LinkedList(&ll));
 }
 END_TEST
 
@@ -94,7 +94,7 @@ START_TEST(test_isempty_LinkedList_1) {
   ll.head     = &node;
   ll.tail     = &node;
   ll.size = 1;
-  ck_assert_false(isempty_LinkedList(&ll));
+  ck_assert(!isempty_LinkedList(&ll));
 }
 END_TEST
 
