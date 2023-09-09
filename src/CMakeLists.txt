@@ -1,5 +1,5 @@
 file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${ModernCMakeExample_SOURCE_DIR}/include/dll/*.h")
-add_library(dll_library dll.c node.c ${HEADER_LIST})
+add_library(dll_library dll.c ${HEADER_LIST})
 
 target_include_directories(dll_library PUBLIC ../include)
 

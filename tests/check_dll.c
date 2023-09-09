@@ -5,22 +5,37 @@
 #include "dll/dll.h"
 #include "dll/node.h"
 
-START_TEST(test_foo) {
-	int e = foo();
-	ck_assert_int_ne(e, EOF);
+//START_TEST(test_initialize) {
+//	int e = initialize();
+//	// TODO
+//	//ck_assert_int_ne(e, EOF);
+//}
+//END_TEST
+START_TEST(test_add) {
+	int e = add(NULL, NULL);
+	ck_assert_int_eq(0, 0);
+	// TODO
+}
+END_TEST
+START_TEST(test_getNode) {
+	int e = getNode(NULL);
+	ck_assert_int_eq(0, 0);
+	// TODO
 }
 END_TEST
 
-Suite *foo_suite(void) {
+Suite *dll_suite(void) {
 	Suite *s;
 	TCase *tc_core;
 
-	s = suite_create("Foo");
+	s = suite_create("DLL");
 
 	/* Core test case */
 	tc_core = tcase_create("Core");
 
-	tcase_add_test(tc_core, test_foo);
+	//tcase_add_test(tc_core, test_initialize);
+	tcase_add_test(tc_core, test_add);
+	tcase_add_test(tc_core, test_getNode);
 	suite_add_tcase(s, tc_core);
 
 	return s;
@@ -31,7 +46,7 @@ int main(void) {
 	Suite *s;
 	SRunner *sr;
 
-	s = foo_suite();
+	s = dll_suite();
 	sr = srunner_create(s);
 
 	srunner_run_all(sr, CK_NORMAL);
@@ -40,3 +55,4 @@ int main(void) {
 	return (number_failed == 0)
 	? EXIT_SUCCESS : EXIT_FAILURE;
 }
+
