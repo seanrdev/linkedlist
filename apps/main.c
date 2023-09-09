@@ -54,34 +54,46 @@ static int process_line(linkedlist_t *ll, char *line) {
   char cmd[LINESZ];
   if(strncmp(line, "isempty", sizeof("isempty") - 1) == 0) {
     printf("%b\n", isempty_LinkedList(ll));
-    return EXIT_SUCCESS;
+    line = line + sizeof("isempty");
+    if(__builtin_expect(line[0] == '\0', true)) return EXIT_SUCCESS;
+    fprintf(stderr, "unmatched input: %s\n", line);
   }
   if(strncmp(line, "find", sizeof("find") - 1) == 0) {
     element_t elem;
-    sscanf(line, "%d", &elem); // TODO error check
+    sscanf(line+sizeof("find"), "%d", &elem); // TODO error check
     printf("%d\n", find_LinkedList(ll, elem)); // TODO ssize_t
-    return EXIT_SUCCESS;
+    line = line + sizeof("find");
+    if(__builtin_expect(line[0] == '\0', true)) return EXIT_SUCCESS;
+    fprintf(stderr, "unmatched input: %s\n", line);
   }
   if(strncmp(line, "get", sizeof("get") - 1) == 0) {
     size_t ndx;
     sscanf(line, "%u", &ndx); // TODO error check, size_t
     printf("%d\n", get_LinkedList(ll, ndx));
-    return EXIT_SUCCESS;
+    line = line + sizeof("get");
+    if(__builtin_expect(line[0] == '\0', true)) return EXIT_SUCCESS;
+    fprintf(stderr, "unmatched input: %s\n", line);
   }
   if(strncmp(line, "insert", sizeof("insert") - 1) == 0) {
     element_t elem;
     ssize_t   e;
     sscanf(line, "%d", &elem); // TODO error check
     e = insert_LinkedList(ll, elem);
-    if(__builtin_expect(e != -1, true)) return EXIT_SUCCESS;
-    fprintf(stderr, "failed to insert element: %d\n", elem);
-    return e;
+    if(__builtin_expect(e == -1, false)) {
+      fprintf(stderr, "failed to insert element: %d\n", elem);
+      return e;
+    }
+    line = line + sizeof("insert");
+    if(__builtin_expect(line[0] == '\0', true)) return EXIT_SUCCESS;
+    fprintf(stderr, "unmatched input: %s\n", line);
   }
   if(strncmp(line, "remove", sizeof("remove") - 1) == 0) {
     size_t ndx;
     sscanf(line, "%u", &ndx); // TODO error check, size_t
     printf("%d\n", remove_LinkedList(ll, ndx));
-    return EXIT_SUCCESS;
+    line = line + sizeof("remove");
+    if(__builtin_expect(line[0] == '\0', true)) return EXIT_SUCCESS;
+    fprintf(stderr, "unmatched input: %s\n", line);
   }
   fprintf(stderr, "unrecognized command: %s\n", line);
   return EXIT_FAILURE;
