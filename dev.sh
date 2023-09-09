@@ -9,7 +9,7 @@ git commit -m "$*" || :
 #rm -rf build
 cmake -S . -B build -GNinja -DCMAKE_BUILD_TYPE=Debug
 cmake --build build
-cmake --build build --target test -DCTEST_OUTPUT_ON_FAILURE=True
+cmake --build build -DCTEST_OUTPUT_ON_FAILURE=True --target test
 cmake --build build --target docs
 cmake --build build --target package
 cmake --build build --target package_source
