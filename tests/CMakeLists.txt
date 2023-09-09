@@ -6,8 +6,6 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(check)
 
-list(APPEND CMAKE_CTEST_ARGUMENTS "--output-on-failure")
-
 add_executable(check_dll check_dll.c)
 target_compile_features(check_dll PRIVATE cxx_std_17)
 target_link_libraries(check_dll PRIVATE dll_library node_library Check::check)
