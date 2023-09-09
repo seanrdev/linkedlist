@@ -51,7 +51,6 @@ static int init_files(FILE *files[], const int argc, const char *const argv[]) {
  */
 static int process_line(linkedlist_t *ll, char *line) {
   printf("line: %s\n", line);
-  char cmd[LINESZ];
   if(strncmp(line, "isempty", sizeof("isempty") - 1) == 0) {
     printf("%b\n", isempty_LinkedList(ll));
     line = line + sizeof("isempty");
