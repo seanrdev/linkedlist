@@ -16,7 +16,7 @@ extern "C" {
 typedef struct LinkedList{
   node_t *head;
   node_t *tail;
-  size_t  elements;
+  size_t  size;
 } linkedlist_t;
 
 /**

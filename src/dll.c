@@ -7,14 +7,14 @@ typedef struct LinkedList{
 	struct Node *head;
 	struct Node *tail;
 	int size;
-}LinkedList;
+} linkedlist_t;
 
 int initialize(linkedlist_t *l){
-	a->head = NULL;
-	a->tail = NULL;
+	l->head = NULL;
+	l->tail = NULL;
 }
 
-void add(node_t *a, LinkedList *l){
+void add(node_t *a, linkedlist_t *l){
 	if(l->size == 0){
 		l->head = a;
 		a->prev = NULL;
@@ -49,7 +49,7 @@ int getNode(unsigned int node_num, linkedlist_t *l){
 }
 
 //return -1 if an issue with removing the Node
-int removeNode(unsigned int node_num, LinkedList *l){
+int removeNode(unsigned int node_num, linkedlist_t *l){
 	if(l->size > node_num){
 		return -1;
 	}
