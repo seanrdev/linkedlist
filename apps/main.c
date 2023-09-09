@@ -49,12 +49,15 @@ static int init_files(FILE *files[], const int argc, const char *const argv[]) {
  * @returns non-zero on error
  */
 static int process_line(char *line) {
+  printf("line: %s\n", line);
+  char cmd[LINESZ];
+  
   //bool        isempty_LinkedList(linkedlist_t *ll);
   //ssize_t        find_LinkedList(linkedlist_t *ll, element_t elem);
   //element_t      *get_LinkedList(linkedlist_t *ll, size_t ndx);
   //ssize_t      insert_LinkedList(linkedlist_t *ll, element_t elem);
   //element_t    remove_LinkedList(linkedlist_t *ll, size_t ndx);
-  printf("line: %s\n", line);
+
   return EXIT_SUCCESS;
 }
 
@@ -67,7 +70,7 @@ static int process_file(FILE *file) {
   char line[LINESZ];
   while(fgets(line, sizeof(line), file)) {
     e = process_line(line);
-    if(__builtin_expect(e == 0, true)) continue;
+    if(__builtin_expect(e == EXIT_SUCCESS, true)) continue;
     fprintf(stderr, "failed to process line: %s\n", line);
     return e;
   }
@@ -89,20 +92,33 @@ static int process_file(FILE *file) {
 int main(const int argc, const char *const argv[]) {
   linkedlist_t ll;
   size_t i;
+  int e;
   FILE **files = (FILE **) malloc(argc * sizeof(FILE *));
   FILE  *file;
   if(__builtin_expect(malloc == NULL, false)) {
     fputs("failed to allocate memory for FILE pointer array", stderr);
     return EXIT_FAILURE;
   }
-  init_files(files, argc, argv);
-  for(i = 0; i < argc; i++) {
-    const int e = process_file(files[i]);
-    if(__builtin_expect(e == 0, true)) continue;
-    fprintf(stderr, "failed to process file: %s\n", argv[i+1]);
+  e = init_files(files, argc, argv);
+  if(__builtin_expect(e != EXIT_SUCCESS, false)) {
+    fputs("failed to initialize FILE pointer array", stderr);
+    free(files);
     return e;
   }
-  deinit_files(files, argc);
+  for(i = 0; i < argc; i++) {
+    const int e = process_file(files[i]);
+    if(__builtin_expect(e == EXIT_SUCCESS, true)) continue;
+    fprintf(stderr, "failed to process file: %s\n", argv[i+1]);
+    deinit_files(files, argc);
+    free(files);
+    return e;
+  }
+  e = deinit_files(files, argc);
+  if(__builtin_expect(e != EXIT_SUCCESS, false)) {
+    fputs("failed to deinitialize FILE pointer array", stderr);
+    free(files);
+    return e;
+  }
   free(files);
   return EXIT_SUCCESS;
 }
