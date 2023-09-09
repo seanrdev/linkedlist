@@ -31,7 +31,7 @@ static int init_files(FILE *files[], const int argc, const char *const argv[]) {
     return EXIT_SUCCESS;
   }
   for(i = 1; i < argc; i++) {
-    files[i-1] = fopen(argv[i], "r")
+    files[i-1] = fopen(argv[i], "r");
     if(__builtin_expect(files[i-1] != NULL, true)) continue;
     fprintf(stderr, "failed to initialize FILE pointer for file: %s\n", argv[i]);
     return EXIT_FAILURE | deinit_files(files, i);
