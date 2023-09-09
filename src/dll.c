@@ -36,7 +36,7 @@ void add(Node *a, LinkedList *l){
 	}
 }
 
-Node* getNode(unsigned int node_num, LinkedList *l){
+int getNode(unsigned int node_num, LinkedList *l){
 	if(l->elements > node_num){
 		return NULL;
 	}
