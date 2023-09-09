@@ -22,7 +22,7 @@ START_TEST(test_init_LinkedList) {
   init_LinkedList(&ll);
   ck_assert_ptr_null(ll.head);
   ck_assert_ptr_null(ll.tail);
-  ck_assert_int_eq(ll.elements, 0);
+  ck_assert_int_eq(ll.size, 0);
 }
 END_TEST
 
@@ -32,7 +32,7 @@ START_TEST(test_deinit_LinkedList_0) {
   deinit_LinkedList(&ll);
   ck_assert_ptr_null(ll.head);
   ck_assert_ptr_null(ll.tail);
-  ck_assert_int_eq(ll.elements, 0);
+  ck_assert_int_eq(ll.size, 0);
 }
 
 END_TEST
@@ -42,11 +42,11 @@ START_TEST(test_deinit_LinkedList_1) {
   init_Node(&node, NULL, NULL, -1);
   ll.head     = &node;
   ll.tail     = &node;
-  ll.elements = 1;
+  ll.size = 1;
   deinit_LinkedList(&ll);
   ck_assert_ptr_null(ll.head);
   ck_assert_ptr_null(ll.tail);
-  ck_assert_int_eq(ll.elements, 0);
+  ck_assert_int_eq(ll.size, 0);
 }
 END_TEST
 
@@ -57,11 +57,11 @@ START_TEST(test_deinit_LinkedList_2) {
   init_Node(&b, NULL, &a,   -2);
   ll.head     = &a;
   ll.tail     = &b;
-  ll.elements = 2;
+  ll.size = 2;
   deinit_LinkedList(&ll);
   ck_assert_ptr_null(ll.head);
   ck_assert_ptr_null(ll.tail);
-  ck_assert_int_eq(ll.elements, 0);
+  ck_assert_int_eq(ll.size, 0);
 }
 END_TEST
 
@@ -73,11 +73,11 @@ START_TEST(test_deinit_LinkedList_3) {
   init_Node(&c, NULL, &b,   -3);
   ll.head     = &a;
   ll.tail     = &c;
-  ll.elements = 3;
+  ll.size = 3;
   deinit_LinkedList(&ll);
   ck_assert_ptr_null(ll.head);
   ck_assert_ptr_null(ll.tail);
-  ck_assert_int_eq(ll.elements, 0);
+  ck_assert_int_eq(ll.size, 0);
 }
 END_TEST
 
@@ -93,7 +93,7 @@ START_TEST(test_isempty_LinkedList_1) {
   linkedlist_t ll;
   ll.head     = &node;
   ll.tail     = &node;
-  ll.elements = 1;
+  ll.size = 1;
   ck_assert_false(isempty_LinkedList(&ll));
 }
 END_TEST
@@ -113,7 +113,7 @@ START_TEST(test_find_LinkedList_1T) {
   init_Node(&node, NULL, NULL, 10);
   ll.head     = &node;
   ll.tail     = &node;
-  ll.elements = 1;
+  ll.size = 1;
   ck_assert_int_eq(find_LinkedList(&ll, 10), 0);
 }
 END_TEST
@@ -125,7 +125,7 @@ START_TEST(test_find_LinkedList_1F) {
   init_Node(&node, NULL, NULL, -10);
   ll.head     = &node;
   ll.tail     = &node;
-  ll.elements = 1;
+  ll.size = 1;
   ck_assert_int_eq(find_LinkedList(&ll, 10), 0);
 }
 END_TEST
