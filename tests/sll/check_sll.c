@@ -43,7 +43,7 @@ START_TEST(test_deinit_SLinkedList_1) {
   ll.head     = &node;
   //ll.tail     = &node;
   ll.size = 1;
-  deinit_LinkedList(&ll);
+  deinit_SLinkedList(&ll);
   ck_assert_ptr_null(ll.head);
   //ck_assert_ptr_null(ll.tail);
   ck_assert_int_eq(ll.size, 0);

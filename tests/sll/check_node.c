@@ -28,7 +28,7 @@ END_TEST
 START_TEST(test_deinit_SLLNode) {
   sll_node_t node;
   node.next    = &node;
-  node.prev    = &node;
+  //node.prev    = &node;
   node.element = -1;
   deinit_SLLNode(&node);
   ck_assert_ptr_null(node.next);
