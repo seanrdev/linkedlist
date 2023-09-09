@@ -31,7 +31,7 @@ sll_node_t *alloc_SLLNode();
  * @param prev Node before parameter node
  * @param element value at parameter node
  */
-void   init_SLLNode(sll_node_t *node, sll_node_t *next, ssl_node_t *prev, sll_element_t element);
+void   init_SLLNode(sll_node_t *node, sll_node_t *next, sll_node_t *prev, sll_element_t element);
 
 /**
  * deinitialize a Node for security
