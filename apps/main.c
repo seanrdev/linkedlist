@@ -3,8 +3,9 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "dll/dll.h"
-//#include "dll/node.h"
+#include "dll/node.h"
 
 #define LINESZ (256)
 
@@ -48,28 +49,53 @@ static int init_files(FILE *files[], const int argc, const char *const argv[]) {
  * @param line
  * @returns non-zero on error
  */
-static int process_line(char *line) {
+static int process_line(linkedlist_t *ll, char *line) {
   printf("line: %s\n", line);
   char cmd[LINESZ];
-  
-  //bool        isempty_LinkedList(linkedlist_t *ll);
-  //ssize_t        find_LinkedList(linkedlist_t *ll, element_t elem);
-  //element_t      *get_LinkedList(linkedlist_t *ll, size_t ndx);
-  //ssize_t      insert_LinkedList(linkedlist_t *ll, element_t elem);
-  //element_t    remove_LinkedList(linkedlist_t *ll, size_t ndx);
-
-  return EXIT_SUCCESS;
+  if(strncmp(line, "isempty", sizeof("isempty") - 1) == 0) {
+    printf("%b\n", isempty_LinkedList(ll));
+    return EXIT_SUCCESS;
+  }
+  if(strncmp(line, "find", sizeof("find") - 1) == 0) {
+    element_t elem;
+    sscanf(line, "%d", &elem); // TODO error check
+    printf("%d\n", find_LinkedList(ll, elem)); // TODO ssize_t
+    return EXIT_SUCCESS;
+  }
+  if(strncmp(line, "get", sizeof("get") - 1) == 0) {
+    size_t ndx;
+    sscanf(line, "%u", &ndx); // TODO error check, size_t
+    printf("%d\n", get_LinkedList(ll, ndx));
+    return EXIT_SUCCESS;
+  }
+  if(strncmp(line, "insert", sizeof("insert") - 1) == 0) {
+    element_t elem;
+    ssize_t   e;
+    sscanf(line, "%d", &elem); // TODO error check
+    e = insert_LinkedList(ll, elem);
+    if(__builtin_expect(e != -1, true)) return EXIT_SUCCESS;
+    fprintf(stderr, "failed to insert element: %d\n", elem);
+    return e;
+  }
+  if(strncmp(line, "remove", sizeof("remove") - 1) == 0) {
+    size_t ndx;
+    sscanf(line, "%u", &ndx); // TODO error check, size_t
+    printf("%d\n", remove_LinkedList(ll, ndx));
+    return EXIT_SUCCESS;
+  }
+  fprintf(stderr, "unrecognized command: %s\n", line);
+  return EXIT_FAILURE;
 }
 
 /**
  * @param file
  * @returns non-zero on error
  */
-static int process_file(FILE *file) {
+static int process_file(linkedlist_t *ll, FILE *file) {
   int e;
   char line[LINESZ];
   while(fgets(line, sizeof(line), file)) {
-    e = process_line(line);
+    e = process_line(ll, line);
     if(__builtin_expect(e == EXIT_SUCCESS, true)) continue;
     fprintf(stderr, "failed to process line: %s\n", line);
     return e;
@@ -106,7 +132,7 @@ int main(const int argc, const char *const argv[]) {
     return e;
   }
   for(i = 0; i < argc; i++) {
-    const int e = process_file(files[i]);
+    const int e = process_file(&ll, files[i]);
     if(__builtin_expect(e == EXIT_SUCCESS, true)) continue;
     fprintf(stderr, "failed to process file: %s\n", argv[i+1]);
     deinit_files(files, argc);
