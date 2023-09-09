@@ -1,6 +1,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "sll/sll.h"
 #include "sll/node.h"
 
 slinkedlist_t *alloc_SLinkedList() {
