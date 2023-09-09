@@ -4,7 +4,7 @@ set -euxo nounset
 
 git pull
 git add .
-git commit -m "$*"
+git commit -m "$*" || :
 
 #rm -rf build
 cmake -S . -B build -GNinja -DCMAKE_BUILD_TYPE=Debug
