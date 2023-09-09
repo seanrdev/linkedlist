@@ -18,7 +18,7 @@ START_TEST(test_free_LinkedList) {
 END_TEST
 
 START_TEST(test_init_LinkedList) {
-  linkedlist_t node;
+  linkedlist_t ll;
   init_LinkedList(&ll);
   ck_assert_ptr_null(ll.head);
   ck_assert_ptr_null(ll.tail);
