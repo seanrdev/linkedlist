@@ -14,8 +14,8 @@ extern "C" {
  * and a count of elements
  */
 typedef struct SLinkedList{
-  node_t *head;
-  size_t  size;
+  sll_node_t *head;
+  size_t      size;
 } slinkedlist_t;
 
 /**

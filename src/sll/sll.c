@@ -1,3 +1,4 @@
+#include <limits.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -57,7 +58,7 @@ ssize_t      insert_SLinkedList(slinkedlist_t *ll, sll_element_t elem) {
   assert(ll != NULL);
   sll_node_t *node = alloc_SLLNode();
   if(__builtin_expect(node == NULL, false)) return -1;
-  init_SLLNode(node, ll->head, elem);
+  init_SLLNode(node, ll->head, NULL, elem);
   ll->head = node;
   ll->size++;
   return ll->size;
