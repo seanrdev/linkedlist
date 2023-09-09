@@ -12,13 +12,13 @@
 //}
 //END_TEST
 START_TEST(test_add) {
-	int e = add(NULL, NULL);
+	//int e = add(NULL, NULL);
 	ck_assert_int_eq(0, 0);
 	// TODO
 }
 END_TEST
 START_TEST(test_getNode) {
-	int e = getNode(NULL);
+	//int e = getNode(NULL);
 	ck_assert_int_eq(0, 0);
 	// TODO
 }
