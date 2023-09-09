@@ -38,7 +38,7 @@ void add(Node *a, LinkedList *l){
 
 int getNode(unsigned int node_num, LinkedList *l){
 	if(l->elements > node_num){
-		return NULL;
+		return -1;
 	}
 	int index = 1;
 	Node *traverse = l->head;
@@ -48,4 +48,20 @@ int getNode(unsigned int node_num, LinkedList *l){
 	return traverse->digit;
 }
 
-
+//return -1 if an issue with removing the Node
+int removeNode(unsigned int node_num, LinkedList *l){
+	if(l->elements > node_num){
+		return -1;
+	}
+	int index = 1;
+	Node *traverse = l->head;
+	while(index < node_num){
+		traverse = traverse->next;
+	}
+	//Here is where the node should be removed.
+	//At least that's how it works in my brain.
+	traverse->next->prev = traverse->prev;
+	traverse->prev->next = traverse->next;
+	free(traverse);
+	l->elements--;
+}
