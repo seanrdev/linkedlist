@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <limits.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -19,7 +20,7 @@ slinkedlist_t *alloc_SLinkedList() {
 
 void         deinit_SLinkedList(slinkedlist_t *ll) {
   while(! isempty_SLinkedList(ll)) remove_SLinkedList(ll, 0);
-  init_SlinkedList(ll);
+  init_SLinkedList(ll);
 }
 
 /*int*/void    free_SLinkedList(slinkedlist_t *ll) {
