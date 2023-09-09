@@ -9,6 +9,19 @@
 
 #define LINESZ (256)
 
+// TODO delete these stubs once the implementations are complete
+linkedlist_t *alloc_LinkedList()                                 { return NULL; }
+void           init_LinkedList(linkedlist_t *ll)                 { }
+void         deinit_LinkedList(linkedlist_t *ll)                 { }
+void           free_LinkedList(linkedlist_t *ll)                 { }
+bool        isempty_LinkedList(linkedlist_t *ll)                 { return true; }
+ssize_t        find_LinkedList(linkedlist_t *ll, element_t elem) { return   -1; }
+element_t      *get_LinkedList(linkedlist_t *ll, size_t ndx)     { return    0; }
+ssize_t      insert_LinkedList(linkedlist_t *ll, element_t elem) { return   -1; }
+element_t    remove_LinkedList(linkedlist_t *ll, size_t ndx)     { return    0; }
+
+
+
 /**
  * @param files
  * @param argc
