@@ -6,6 +6,8 @@ git pull
 git add .
 git commit -m "$*" || :
 
+export CTEST_OUTPUT_ON_FAILURE=1
+
 #rm -rf build
 cmake -S . -B build -GNinja -DCMAKE_BUILD_TYPE=Debug
 cmake --build build
