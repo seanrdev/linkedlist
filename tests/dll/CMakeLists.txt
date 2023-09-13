@@ -16,5 +16,3 @@ target_compile_features(check_dllnode PRIVATE cxx_std_17)
 target_link_libraries(check_dllnode PRIVATE dllnode_library Check::check)
 add_test(NAME check_dllnodetest COMMAND check_dllnode) # Command can be a target
 
-list(APPEND CMAKE_CTEST_ARGUMENTS "--output-on-failure")
-
