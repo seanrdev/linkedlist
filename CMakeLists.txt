@@ -33,6 +33,9 @@ add_subdirectory(apps)
 
 if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR MODERN_CMAKE_BUILD_TESTING)
    AND BUILD_TESTING)
+  list(APPEND CMAKE_CTEST_ARGUMENTS "--output-on-failure")
+  #set (CTEST_OUTPUT_ON_FAILURE 1)
+
   add_subdirectory(tests)
 endif()
 
