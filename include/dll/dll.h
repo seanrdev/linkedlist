@@ -7,7 +7,7 @@ extern "C" {
 
 #include <stdbool.h>
 #include "node.h"
-
+#define NULL ((char *)0)
 /**
  * Doubly-linked list
  * with pointers to head and tail nodes
