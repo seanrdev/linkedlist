@@ -20,6 +20,7 @@ linkedlist_t *alloc_LinkedList(){
 void init_LinkedList(linkedlist_t *ll){
 	ll->head = NULL;
 	ll->tail = NULL;
+	ll->size = 0;
 }
 
 void deinit_LinkedList(linkedlist_t *ll){
