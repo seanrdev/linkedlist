@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include "dll/node.h"
 #include <stdbool.h>
-#define NULL ((char *)0)
 
 typedef struct LinkedList{
 	struct Node *head;

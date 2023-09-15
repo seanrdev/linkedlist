@@ -10,6 +10,7 @@
 #define LINESZ (256)
 
 // TODO delete these stubs once the implementations are complete
+/*
 linkedlist_t *alloc_LinkedList()                                 { return NULL; }
 void           init_LinkedList(linkedlist_t *ll)                 { }
 void         deinit_LinkedList(linkedlist_t *ll)                 { }
@@ -19,7 +20,7 @@ ssize_t        find_LinkedList(linkedlist_t *ll, element_t elem) { return   -1; 
 element_t      *get_LinkedList(linkedlist_t *ll, size_t ndx)     { return    0; }
 ssize_t      insert_LinkedList(linkedlist_t *ll, element_t elem) { return   -1; }
 element_t    remove_LinkedList(linkedlist_t *ll, size_t ndx)     { return    0; }
-
+*/
 
 /**
  * @param files
@@ -64,7 +65,7 @@ static int init_files(FILE *files[], const int argc, const char *const argv[]) {
 static int process_line(linkedlist_t *ll, char *line) {
   printf("line: %s\n", line);
   if(strncmp(line, "isempty", sizeof("isempty") - 1) == 0) {
-    printf("%b\n", isempty_LinkedList(ll));
+    printf("%i\n", isempty_LinkedList(ll));
     line = line + sizeof("isempty");
     if(__builtin_expect(line[0] == '\0', true)) return EXIT_SUCCESS;
     fprintf(stderr, "unmatched input: %s\n", line);
@@ -72,15 +73,15 @@ static int process_line(linkedlist_t *ll, char *line) {
   if(strncmp(line, "find", sizeof("find") - 1) == 0) {
     element_t elem;
     sscanf(line+sizeof("find"), "%d", &elem); // TODO error check
-    printf("%d\n", find_LinkedList(ll, elem)); // TODO ssize_t
+    printf("%lu\n", find_LinkedList(ll, elem)); // TODO ssize_t
     line = line + sizeof("find");
     if(__builtin_expect(line[0] == '\0', true)) return EXIT_SUCCESS;
     fprintf(stderr, "unmatched input: %s\n", line);
   }
   if(strncmp(line, "get", sizeof("get") - 1) == 0) {
     size_t ndx;
-    sscanf(line, "%u", &ndx); // TODO error check, size_t
-    printf("%d\n", get_LinkedList(ll, ndx));
+    sscanf(line, "%lu", &ndx); // TODO error check, size_t
+    printf("%p\n", get_LinkedList(ll, ndx));
     line = line + sizeof("get");
     if(__builtin_expect(line[0] == '\0', true)) return EXIT_SUCCESS;
     fprintf(stderr, "unmatched input: %s\n", line);
@@ -100,7 +101,7 @@ static int process_line(linkedlist_t *ll, char *line) {
   }
   if(strncmp(line, "remove", sizeof("remove") - 1) == 0) {
     size_t ndx;
-    sscanf(line, "%u", &ndx); // TODO error check, size_t
+    sscanf(line, "%lu", &ndx); // TODO error check, size_t
     printf("%d\n", remove_LinkedList(ll, ndx));
     line = line + sizeof("remove");
     if(__builtin_expect(line[0] == '\0', true)) return EXIT_SUCCESS;
